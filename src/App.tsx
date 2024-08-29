@@ -1,19 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-function Home() {
-  return <h2>Home Page</h2>;
-}
-
-function About() {
-  return <h2>About Page</h2>;
-}
+import LandingPage from './LandingPage/LandingPage';
+import Layout from './Layout';
+import Home from './Home/Home';
+import RegisterForm from './components/users/Register';
+import LoginForm from './components/users/Login';
+import Dashboard from './Dashboard/Admin';
+import EmployeeProfile from './components/users/employee';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/" element={<LandingPage />} />
+        
+        <Route path="/*" element={<Layout />}>
+          <Route path="home" element={<Home />} />
+          <Route path="register" element={<RegisterForm />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="employee" element={<EmployeeProfile />} />
+          <Route path="dashboard-admin/*" element={<Dashboard />} />
+        </Route>
       </Routes>
     </Router>
   );
