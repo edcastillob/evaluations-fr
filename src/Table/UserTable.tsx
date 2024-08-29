@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
@@ -78,13 +78,23 @@ const UserTable: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, type, ariaChecked, value } = e.target as HTMLInputElement | HTMLSelectElement;
-    setUpdatedUser(prevState => ({
-      ...prevState,
-      [name]: type === 'checkbox' ? (ariaChecked as unknown as boolean) : value
-    }));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+  
+    // Verifica si el target es un input y si es de tipo checkbox
+    if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox') {
+      setUpdatedUser({
+        ...updatedUser,
+        [name]: e.target.checked,
+      });
+    } else {
+      setUpdatedUser({
+        ...updatedUser,
+        [name]: value,
+      });
+    }
   };
+  
   
 
   const handleUpdate = async (e: FormEvent) => {
