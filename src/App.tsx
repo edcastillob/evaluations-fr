@@ -6,6 +6,7 @@ import RegisterForm from './components/users/Register';
 import LoginForm from './components/users/Login';
 import Dashboard from './Dashboard/Admin';
 import EmployeeProfile from './components/users/employee';
+import Documentation from './components/Documentation/Documentation';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="register" element={<RegisterForm />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="employee" element={<EmployeeProfile />} />
+          <Route path="documentation" element={<Documentation />} />
           <Route path="dashboard-admin/*" element={<Dashboard />} />
         </Route>
       </Routes>
